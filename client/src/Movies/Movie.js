@@ -4,8 +4,6 @@ import axios from 'axios';
 import requester from 'easier-requests';
 
 async function getMovie(movieID, setMovie) {
-  requester.setOptions({throwOnFailure: true});
-
   const uid = requester.createUniqueID();
   await requester.get(`http://localhost:5000/api/movies/${movieID}`, uid);
   setMovie(requester.response(uid).data);

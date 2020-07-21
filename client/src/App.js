@@ -5,6 +5,7 @@ import MovieList from './Movies/MovieList.js';
 import SavedList from './Movies/SavedList';
 
 function App () {
+  requester.setOptions({throwOnFailure: true});
   const [saved, setSaved] = useState([]); // Stretch: the ids of "saved" movies
   const [movies, setMovies] = useState([]);
 
