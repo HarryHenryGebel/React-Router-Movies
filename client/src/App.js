@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import {Route} from 'react-router-dom';
 import axios from 'axios';
-
+import MovieList from './Movies/MovieList.js';
 import SavedList from './Movies/SavedList';
 
-const App = () => {
+function App () {
   const [saved, setSaved] = useState([]); // Stretch: the ids of "saved" movies
-  const [movieList, setMovieList] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const getMovies = () => {
       axios
         .get('http://localhost:5000/api/movies')
         .then(response => {
-          setMovieList(response.data);
+          setMovies(response.data);
         })
         .catch(error => {
           console.error('Server Error', error);
         });
-    }
+    };
     getMovies();
   }, []);
 
@@ -28,9 +29,13 @@ const App = () => {
   return (
     <div>
       <SavedList list={[ /* This is stretch */]} />
-      <div>Replace this Div with your Routes</div>
+      <Route exact path="/">
+        <MovieList movies={movies}/>
+      </Route>
     </div>
   );
 };
 
 export default App;
+
+//  LocalWords:  SavedList

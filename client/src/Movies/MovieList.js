@@ -1,6 +1,7 @@
 import React from 'react';
 
-const MovieList = props => {
+export default function MovieList(props) {
+  console.log(props);
   return (
     <div className="movie-list">
       {props.movies.map(movie => (
@@ -24,5 +25,3 @@ function MovieDetails({ movie }) {
     </div>
   );
 }
-
-export default MovieList;
