@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import requester from 'easier-requests';
 
-async function getMovie(movieID, setMovie) {
-  const uid = requester.createUniqueID();
-  await requester.get(`http://localhost:5000/api/movies/${movieID}`, uid);
-  setMovie(requester.response(uid).data);
+function getMovie(movieID, setMovie) {
+  async function _getMovie(movieID, setMovie) {
+    const uid = requester.createUniqueID();
+    await requester.get(`http://localhost:5000/api/movies/${movieID}`, uid);
+    setMovie(requester.response(uid).data);
+  }
+  _getMovie(movieID, setMovie);
 }
 
 export default function Movie(props) {
