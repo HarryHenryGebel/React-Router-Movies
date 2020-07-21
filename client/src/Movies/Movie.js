@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import axios from 'axios';
 import requester from 'easier-requests';
 
 async function getMovie(movieID, setMovie) {

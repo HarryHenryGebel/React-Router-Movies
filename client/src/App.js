@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {Route} from 'react-router-dom';
-import axios from 'axios';
 import MovieList from './Movies/MovieList.js';
 import Movie from './Movies/Movie';
 import SavedList from './Movies/SavedList';
