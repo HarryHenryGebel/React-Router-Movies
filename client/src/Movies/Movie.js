@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useRouteMatch } from 'react-router-dom';
 import axios from 'axios';
+import requester from 'easier-requests';
 
-const Movie = (props) => {
+async function getMovie(movieID, setMovie) {
+  requester.setOptions({throwOnFailure: true});
+
+  const uid = requester.createUniqueID();
+  await requester.get(`http://localhost:5000/api/movies/${movieID}`, uid);
+  setMovie(requester.response(uid).data);
+}
+
+export default function Movie(props) {
   const [movie, setMovie] = useState();
- 
-  useEffect(() => {
-    const id = 1;
-    // change ^^^ that line and grab the id from the URL
-    // You will NEED to add a dependency array to this effect hook
+  const id = useRouteMatch().params.id;
 
-       axios
-        .get(`http://localhost:5000/api/movies/${id}`)
-        .then(response => {
-          setMovie(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+  useEffect(() => getMovie(id, setMovie), [id]);
 
-  },[]);
-  
   // Uncomment this only when you have moved on to the stretch goals
   // const saveMovie = evt => {
   // }
@@ -52,4 +49,4 @@ const Movie = (props) => {
   );
 }
 
-export default Movie;
+//  LocalWords:  movieID
